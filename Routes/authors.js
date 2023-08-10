@@ -23,7 +23,7 @@ router.post('/', async (req,res)=>{
     } catch (err) {
         res.render('authors/new', {
             author: author,
-            errormessage: "Error Creating Author"
+            errorMessage: "Error Creating Author",
         });
     }
 
