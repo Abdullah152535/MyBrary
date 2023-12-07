@@ -40,15 +40,12 @@ mongoose
   .then(() => console.log("Connected to Mongo...."))
   .catch((error) => console.log(error.message));
 
-
-
-app.use('/',IndexRouter);
 app.use('/auth',authRouter);
+app.use('/',authentication,IndexRouter);
 app.use('/authors',authorsRouter);
-app.use('/books',booksRouter);
+app.use('/books', booksRouter);
 
 app.listen(PORT);
 console.log(`App is listening at Port ${PORT} `);
-
 
 
