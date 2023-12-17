@@ -38,3 +38,29 @@ body {
 .error-message {
   color: hsl(var(--color-danger-hue), 100%, 50%);
 }
+
+
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.pagination a {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.pagination span {
+  font-weight: bold;
+  font-style: italic;
+  color:black;
+}

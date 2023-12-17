@@ -42,15 +42,19 @@ router.get('/login', async (req, res) => {
 
      if (existingUser) {
        // If a user with the same email exists, render the signup page with an error message
+       console.log("User already exists")
        const errorMessage = "Email already in use.";
        return res.render('signup', { layout: 'layouts/layout2', errorMessage });
      }
     let user = new User(req.body);
+    console.log(req.body)
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
     await user.save();
-    //   return res.send(user);
-    return res.redirect("/");
+    req.session.user = user;
+    req.session.flash =  "Logged in Successfully"
+    return res.redirect("/" );
+
   });
 
 module.exports = router

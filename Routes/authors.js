@@ -5,15 +5,23 @@ const Book = require('../Models/books.js');
 
 // All Authors Route
 router.get('/', async (req, res) => {
+
+   const page = parseInt(req.query.page) || 1;
+   const limit = parseInt(req.query.limit) || 3;
+
     let searchOptions = {}
     if (req.query.name != null && req.query.name !== '') {
       searchOptions.name = new RegExp(req.query.name, 'i')
     }
     try {
-      const authors = await Author.find(searchOptions)
+       const authors = await Author.find(searchOptions)
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .exec();
       res.render('authors/index', {
         authors: authors,
-        searchOptions: req.query
+        searchOptions: req.query,
+        pagination: { page, limit },
       })
     } catch {
       res.redirect('/')

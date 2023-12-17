@@ -34,16 +34,16 @@ app.use(session({
 })
 )
 
+app.use('/auth',authRouter);
+app.use('/',authentication)
+app.use('/',IndexRouter);
+app.use('/authors',authorsRouter);
+app.use('/books', booksRouter);
 
 mongoose
   .connect(DB_KEY, { useNewUrlParser: true })
   .then(() => console.log("Connected to Mongo...."))
   .catch((error) => console.log(error.message));
-
-app.use('/auth',authRouter);
-app.use('/',authentication,IndexRouter);
-app.use('/authors',authorsRouter);
-app.use('/books', booksRouter);
 
 app.listen(PORT);
 console.log(`App is listening at Port ${PORT} `);
