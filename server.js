@@ -9,10 +9,14 @@ const methodOverride = require('method-override')
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const authentication = require('./middlewares/authenticate')  
+const isAdmin = require('./middlewares/isAdmin')
 const IndexRouter = require('./Routes/index')
 const authorsRouter = require('./Routes/authors')
 const booksRouter = require('./Routes/books')
 const authRouter = require('./Routes/auth')
+const adminRouter = require('./Routes/admin')
+const calculatorRouter = require('./Routes/Calculator'); // Add this line
+
 const mongoose = require('mongoose')
 
 const PORT = process.env.PORT || 5000;
@@ -34,11 +38,14 @@ app.use(session({
 })
 )
 
+app.use('/calculator', calculatorRouter);
 app.use('/auth',authRouter);
 app.use('/',authentication)
 app.use('/',IndexRouter);
 app.use('/authors',authorsRouter);
 app.use('/books', booksRouter);
+app.use('/admin',authentication,isAdmin,)
+
 
 mongoose
   .connect(DB_KEY, { useNewUrlParser: true })

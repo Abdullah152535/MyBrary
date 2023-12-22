@@ -8,5 +8,6 @@ function isAuthenticated(req, res, next) {
     // User is not authenticated, redirect them to the login page
     res.redirect('/auth/login');
   }
-  
+
+
   module.exports = isAuthenticated;
